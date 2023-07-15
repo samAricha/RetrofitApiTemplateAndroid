@@ -18,10 +18,6 @@ object RetrofitProvider {
             .build()
     }
 
-    fun createMovieService(): MovieService {
-        return provide().create(MovieService::class.java)
-    }
-
     private fun provideOkhttpClient(): OkHttpClient =
         OkHttpClient.Builder()
             .addInterceptor(HttpLoggingInterceptor().also {
@@ -29,5 +25,10 @@ object RetrofitProvider {
             })
             .addInterceptor(HeaderInterceptor)
             .build()
+
+
+    fun createMovieService(): MovieService {
+        return provide().create(MovieService::class.java)
+    }
 
 }

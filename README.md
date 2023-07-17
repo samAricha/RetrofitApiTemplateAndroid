@@ -22,9 +22,7 @@ And so on...
 
 To get started, clone this repository:
 
-```bash
-git clone https://github.com/yourusername/your-repo-name.git
-
+git clone https://github.com/samAricha/RetrofitApiTemplateAndroid.git
 
 
 ## Prerequisites

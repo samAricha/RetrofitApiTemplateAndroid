@@ -46,10 +46,9 @@ git clone https://github.com/samAricha/RetrofitApiTemplateAndroid.git
 
 ## Project Structure
 
-- `api/` - Contains the Retrofit service interfaces for network calls.
-- `model/` - Contains the data model classes.
+- `data/` - Contains the Retrofit service interfaces and data model classes for network calls.
+- `keys/` - Contains files related to API keys and other secured information.
 - `ui/` - Contains all the UI files, developed using Jetpack Compose.
-- `utils/` - Contains utility classes, such as those for image handling with Coil.
 
 ## Running the Project
 

@@ -1,3 +1,31 @@
+# Retrofit Exploration in Android
+
+This project is an in-depth exploration of Retrofit, a type-safe HTTP client for Android and Java. As we progress through the project, we will also integrate other elements like securing APIs with the Android NDK and image handling with Coil, all while developing a modern UI with Jetpack Compose.
+
+## Overview
+
+The project follows a step-by-step approach, with each step handled as a separate branch for easy reference.
+
+## Steps
+
+1. **Step 1 - Basic Retrofit Setup:** (`step1-basic-retrofit-setup` branch)
+    - Setting up Retrofit for making API calls.
+    - Making a basic GET request to fetch data from an API.
+
+2. **Step 2 - Securing API Key:** (`step2-securing-api-key` branch)
+    - Introduction to the Android NDK.
+    - Storing the API key securely with NDK.
+
+And so on...
+
+## Getting Started
+
+To get started, clone this repository:
+
+```bash
+git clone https://github.com/yourusername/your-repo-name.git
+
+
 
 ## Prerequisites
 

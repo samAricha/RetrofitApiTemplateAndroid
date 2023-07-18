@@ -14,14 +14,19 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.launch
 import teka.android.retrfitapitemplate.data.remote.retrofit.MovieResult
-import teka.android.retrfitapitemplate.data.remote.retrofit.RetrofitProvider
 import teka.android.retrfitapitemplate.ui.theme.RetrfitApiTemplateTheme
+
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.ui.layout.ContentScale
+import coil.compose.rememberImagePainter
+
 
 class MainActivity : ComponentActivity() {
     private val ourViewModel: MainViewModel by viewModels() // Lazily initializing the ViewModel
@@ -32,10 +37,13 @@ class MainActivity : ComponentActivity() {
         setContent {
             RetrfitApiTemplateTheme {
                 Surface(
-                    modifier = Modifier.fillMaxSize().padding(25.dp),
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(25.dp),
                     color = MaterialTheme.colors.background
                 ) {
-                    MovieList(movies = ourViewModel.movieList.value)
+                    val movieList by ourViewModel.movieList.collectAsState()
+                    MovieList(movies = movieList)
                 }
             }
         }
@@ -44,6 +52,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MovieList(movies: List<MovieResult>) {
+//    val imageLoader = rememberImagePainter() // Remember an ImagePainter
     LazyColumn {
         items(movies) { movie ->
             Card(
@@ -51,6 +60,14 @@ fun MovieList(movies: List<MovieResult>) {
                 elevation = 8.dp
             ) {
                 Column {
+                    Image(
+                        painter = rememberImagePainter("https://image.tmdb.org/t/p/w500${movie.poster_path}"),
+                        contentDescription = "Movie poster",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .height(200.dp)
+                            .fillMaxWidth()
+                    )
                     Text(
                         text = "Title: ${movie.title}",
                         style = MaterialTheme.typography.h6,

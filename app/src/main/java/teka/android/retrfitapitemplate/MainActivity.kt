@@ -14,6 +14,8 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -32,10 +34,13 @@ class MainActivity : ComponentActivity() {
         setContent {
             RetrfitApiTemplateTheme {
                 Surface(
-                    modifier = Modifier.fillMaxSize().padding(25.dp),
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(25.dp),
                     color = MaterialTheme.colors.background
                 ) {
-                    MovieList(movies = ourViewModel.movieList.value)
+                    val movieList by ourViewModel.movieList.collectAsState()
+                    MovieList(movies = movieList)
                 }
             }
         }

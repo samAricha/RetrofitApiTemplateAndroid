@@ -3,6 +3,7 @@ package teka.android.retrfitapitemplate
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -23,25 +24,18 @@ import teka.android.retrfitapitemplate.data.remote.retrofit.RetrofitProvider
 import teka.android.retrfitapitemplate.ui.theme.RetrfitApiTemplateTheme
 
 class MainActivity : ComponentActivity() {
+    private val ourViewModel: MainViewModel by viewModels() // Lazily initializing the ViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val movieList = mutableStateOf(listOf<MovieResult>())
-
-        lifecycleScope.launch {
-            val discoverMovies = RetrofitProvider.createMovieService().discoverMovies()
-            movieList.value = discoverMovies.results
-        }
-
-
         setContent {
             RetrfitApiTemplateTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize().padding(25.dp),
                     color = MaterialTheme.colors.background
                 ) {
-                    MovieList(movies = movieList.value)
+                    MovieList(movies = ourViewModel.movieList.value)
                 }
             }
         }
